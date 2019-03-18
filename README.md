@@ -1,6 +1,8 @@
 # IntroToDApps
 
-:construction: ** Work in Progress ** :construction:
+:construction: **Work in Progress** :construction:
+
+First, an ugly diagram:
 
 ![reference](resources/ethereumDiagram.png)
 
