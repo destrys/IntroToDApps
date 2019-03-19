@@ -47,7 +47,7 @@ at the top of the extension. You can click `Account 1` to easily copy the addres
 To use MetaMask with Ganache, you will need to setup a 'Custom RPC' network connection.
 Follow these directions carefully:
 
-1. Open Ganache, don't change any configurations.
+1. Start Ganache, don't change any configurations.
 2. In the Metamask extension, open the network drop-down menu (it should say `Main Ethereum Network` the first time you use Metamask).
 3. Select `Custom RPC`
 4. You should be on a `settings` tab, scroll down to `New Network`.
@@ -79,6 +79,28 @@ cd pet-shop-tutorial
 npm install
 ```
 
+# Exercise - Interact with an example dApp
+
+Assuming installation and config is correct (see above), running the
+pet shop example dApp should be as easy as following these steps:
+
+1. Start Ganache
+2. Select the Custom RPC interface and 'Reset Account' in MetaMask
+3. From within the `pet-shop-tutorial` directory: `truffle migrate --reset`
+4. From within the `pet-shop-tutorial` directory: `npm run dev`
+5. Direct your browser to `localhost:3000`
+
+When you click 'adopt', MetaMask should pop up an authorization window.
+Authorizing the transaction should change the button from 'Adopt' to 'Success'.
+
+The important files for this dApp are:
+(pet-shop-tutorial/contracts/Adoption.sol)[pet-shop-tutorial/contracts/Adoption.sol],
+(pet-shop-tutorial/src/index.html)[pet-shop-tutorial/src/index.html],
+and (pet-shop-tutorial/src/js/app.js)[pet-shop-tutorial/src/js/app.js].
+Open them in you text editor and poke around.
+
+
+
 # Smart Contracts
 
 All paths and commands assume you are in the `pet-shop-tutorial` directory.
@@ -87,9 +109,12 @@ Open `contracts/Adoption.sol` in your text editor.
 
 We'll discuss the function and design of this 'smart' contract for a bit.
 
-Some important points to covers:
+Some important points to cover:
 
 1. What is stored in the contract?
+  a. State
+  b. Logic
+  c. Views (in this case)
 2. How is the contract initialized?
 3. How is the state changed, and who has access?
 4. What cannot be changed?
@@ -100,9 +125,95 @@ Note: Docs regarding the [array getter function].
 
 ## Tests
 
-Open `test/TestAdoption.sol`.
+Open `test/TestAdoption.sol` and `test/TestAdoption.js`
 
-We'll discuss testing.
+We'll discuss testing. Some important points to cover:
+
+1. Solidity vs. Javascript testing
+2. The importance of testing
+
+
+# Exercise - Smart Contract Improvements
+
+## Disallow re-adoption of same pet.
+
+As-is, another address could `adopt()` a pet that has already been adopted,
+overwriting the first adopter's address. The UI doesn't allow this by
+disabling the button, but it wouldn't be hard for someone to change the UI...
+You can see this by commenting out the following line in `src/js/app.js`
+(it's part of the `markAdopted` function).
+
+```
+$('.panel-pet').eq(i).find('button').text('Success').attr('disabled', true);
+```
+
+Implementing this restriction only requires a single line of code, but
+think it through carefully. I've included a test file that you can use.
+Copy the `TestReAdopt.js` from `solutions/` to `test/`.
+Running `truffle test` will now test the an adopted pet can't be re-adopted.
+
+The solution is provided in `solutions/Adoption_stop_readopt.sol`.
+
+**Note:** The tests for this exercise include tests the the contract `reverts`.
+This is an important result to test for (and should have been included in the initial
+tests)
+
+
+
+## Admin address
+
+Now that our contract only allows a pet to be adopted once, it really can only
+handle 16 adoptions and then it's done. It would be nice if someone could reset
+a pet to unadopted, but we don't want anyone on the internet to be able to do that.
+
+So now we need a privaledged user.
+
+The easiest way to set an admin user is to initialize the admin user as the
+address that deployed the contract. Our contract currently doesn't run any function
+as it's initialized. You'll need to create the `constructor` function which is
+a special function that is only called once, when the contract is created.
+([Constructor Function Docs])
+
+Tests are provided in `solutions/TestAdmin.js`, copy to `test/` to use.
+
+The solution is provided in `solutions/Adoption_admin.sol`.
+
+## Admin Reset Function
+
+
+Now that we have an admin address, let's create a function only the admin can use.
+It's basically the reverse of the the `adopt()` function, so let's call it
+`unadopt()`. It still needs to check that the index is valid, but it
+also needs to check if the address executing the function is the admin.
+The address executing the transaction is available at `msg.sender`.
+Give it a shot.
+
+Tests are provided in `solutions/TestUnadopt.js`, copy to `test/` to use.
+
+The solution is provided in `solutions/Adoption_unadopt.sol`.
+
+There are additional checks and functions you could add around this feature:
+
+1. Don't allow `unadopt` to be called if the pet hasn't been adopted.
+2. Allow the admin *or the address that adopted* to unadopt
+3. Create an `unadoptAll` function so an admin could clear all the pets in one transaction.
+
+
+## Additional Ideas:
+
+1. Add a price to adopting.
+2. Create a whitelist of addresses that are allowed to adopt.
+3. Add a pet identifier to the state
+
+
+
+## Addition Smart Contract Resources
+
+1. [Remix] - alternative/complementary IDE
+2. [The Ethernaut] - learn smart contract security issues via blockchain-based 'game'
+
+
+
 
 
 **WIP**
@@ -134,3 +245,6 @@ infura reference: https://medium.com/coinmonks/steps-to-deploy-a-contract-using-
 [bitcoin testnet faucet]: http://tpfaucet.appspot.com/
 [gitter]: https://gitter.im
 [array getter function]: https://solidity.readthedocs.io/en/latest/types.html#arrays
+[constructor function docs]: https://solidity.readthedocs.io/en/v0.5.6/contracts.html#creating-contracts
+[remix]: https://remix.ethereum.org
+[the ethernaut]: https://ethernaut.zeppelin.solutions/
