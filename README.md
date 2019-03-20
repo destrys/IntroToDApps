@@ -18,6 +18,8 @@ First, an ugly diagram:
 * [Kovan Testnet] Tokens (see detailed instructions below)
 * [Infura] account
 
+**Windows Users:** Try using [VS Code with Truffle]
+
 ## Prerequisites
 
 * Basic JavaScript skills
@@ -199,7 +201,7 @@ There are additional checks and functions you could add around this feature:
 3. Create an `unadoptAll` function so an admin could clear all the pets in one transaction.
 
 
-## Additional Ideas:
+## Some Additional Ideas:
 
 1. Add a price to adopting.
 2. Create a whitelist of addresses that are allowed to adopt.
@@ -214,10 +216,42 @@ There are additional checks and functions you could add around this feature:
 
 
 
+# DApps, UIs, Etc.
+
+The term DApp ('decentralized app' or 'distributed app') is used as a catch-all
+for a lot of things. It is usually used to talk about a website that connects to
+a blockchain. Hopefully as the industry matures, the definition will harden.
+For this class, DApp refers to the entire system, both smart contract and interface.
+
+So let's look at the included interface for this tutorial.
+
+**Note:** If you haven't finished the exercies above,
+copy `solutions/Adoption_unadopt.sol` to `contracts/Adoption.sol`. If you
+want to re-work through the exercises, the original `Adoption.sol` is
+included at `solutions/Adoption_original.sol`.
+
+Points to cover:
+
+1. Glance at the html
+2. web3 - where does it come from, what does it do? (window.ethereum)
+3. What data are available on load?
+4. How to request data.
+5. How to form and execute transactions.
 
 
 **WIP**
 
+## Exercise - Admin Viewing Button
+
+## Exercise - UnAdopt Button
+
+## Additional Ideas
+
+1. Admin `resetAll` function
+  a. contract function that resets all adopters
+  b. Admin-only button
+2. Encode the Pet Name in the Smart Contract
+  a. 
 
 
 
@@ -248,3 +282,4 @@ infura reference: https://medium.com/coinmonks/steps-to-deploy-a-contract-using-
 [constructor function docs]: https://solidity.readthedocs.io/en/v0.5.6/contracts.html#creating-contracts
 [remix]: https://remix.ethereum.org
 [the ethernaut]: https://ethernaut.zeppelin.solutions/
+[vscode with truffle]: https://medium.com/edgefund/ethereum-development-on-windows-part-1-da260f6a6c06
