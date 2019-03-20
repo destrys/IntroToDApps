@@ -262,7 +262,7 @@ Points to cover:
 
 
 
-infura reference: https://medium.com/coinmonks/steps-to-deploy-a-contract-using-metamask-and-truffle-7ae65e6d8dc8
+[infura reference]: https://medium.com/coinmonks/steps-to-deploy-a-contract-using-metamask-and-truffle-7ae65e6d8dc8
 
 
 [truffle]: https://truffleframework.com/docs/truffle/getting-started/installation
@@ -282,4 +282,4 @@ infura reference: https://medium.com/coinmonks/steps-to-deploy-a-contract-using-
 [constructor function docs]: https://solidity.readthedocs.io/en/v0.5.6/contracts.html#creating-contracts
 [remix]: https://remix.ethereum.org
 [the ethernaut]: https://ethernaut.zeppelin.solutions/
-[vscode with truffle]: https://medium.com/edgefund/ethereum-development-on-windows-part-1-da260f6a6c06
+[vs code with truffle]: https://medium.com/edgefund/ethereum-development-on-windows-part-1-da260f6a6c06
