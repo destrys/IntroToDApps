@@ -203,7 +203,7 @@ There are additional checks and functions you could add around this feature:
 
 ## Some Additional Ideas:
 
-1. Add a price to adopting.
+1. Add a price to adopting. (look up `payable` in the solidity docs)
 2. Create a whitelist of addresses that are allowed to adopt.
 3. Add a pet identifier to the state
 
@@ -233,17 +233,53 @@ included at `solutions/Adoption_original.sol`.
 Points to cover:
 
 1. Glance at the html
-2. web3 - where does it come from, what does it do? (window.ethereum)
+2. [web3 package] - where does it come from, what does it do? (window.ethereum)
 3. What data are available on load?
 4. How to request data.
 5. How to form and execute transactions.
 
+**Note:** This app included `web3` and `truffle-contract` files. For your project,
+you may want to use the npm to include the [web3] and [truffle-contract]
 
-**WIP**
+**Caution!** The `web3` included in this app is an older version. `web3` v1.0
+is still in beta and
+has many breaking changes, so for this class, refer to the [old web3 docs]. 
+
 
 ## Exercise - Admin Viewing Button
 
+Let's edit the app to notify the viewer if they are the admin.
+
+Copy `solutions/index_admin_badge.html` to replace `src/index.html`.
+
+In `src/js/app.js` take a shot at writing a `setAdmin` function that
+checks if the logged-in [account] matches the admin account of the contract.
+If it doesn't match, [hide] the admin badge.
+
+And be sure to run `setAdmin()` in `initContract`.
+
+A solution is provided in `solutions/app_admin_badge.js`.
+
 ## Exercise - UnAdopt Button
+
+Let's continue by providing the admin an interface to the `unadopt` contract
+function.
+
+Copy `solutions/index_unadopt.html` to `src/index.html` (or write your own button
+code).
+
+As part of `setAdmin`, also hide the `unadopt` buttons from non-admins.
+
+Write a `handleUnadopt` function to call `unadopt` on the contract
+when the Unadopt button is clicked. And don't forget to add the handler to
+`bindEvents`.
+
+**Important Note:** While we are hiding the admin interface from non-admins, there
+is nothing to stop and address from *attempting* to call `unadopt` on our contract.
+What is powerful about dApps is that the authorization is handled by ethereum.
+If the transaction isn't signed by the admin's address, the contract will call
+`revert` and the transaction will be unsuccessful. We don't have to worry
+about users or passwords.
 
 ## Additional Ideas
 
@@ -251,14 +287,18 @@ Points to cover:
   a. contract function that resets all adopters
   b. Admin-only button
 2. Encode the Pet Name in the Smart Contract
-  a. 
+  a. Add another array in the smart contract for pet name
+  b. Choose how to initialize (and edit) the names in the contract
+  c. Decide how to pull names from contract, and add that to the UI.
+3. Allow the adopter to also see the Unadopt button.
+  a. Edit the smart contract to allow the admin *or* the adopter call `unadopt`.
+  b. Edit the javascript to show the Unadopt button for the adopter as well.
 
 
+# Deployment
 
 
-
-
-
+**WIP**
 
 
 
@@ -283,3 +323,9 @@ Points to cover:
 [remix]: https://remix.ethereum.org
 [the ethernaut]: https://ethernaut.zeppelin.solutions/
 [vs code with truffle]: https://medium.com/edgefund/ethereum-development-on-windows-part-1-da260f6a6c06
+[web3 package]: https://web3js.readthedocs.io/en/1.0/
+[web3]: https://www.npmjs.com/package/web3
+[truffle-contract]: https://www.npmjs.com/package/truffle-contract
+[old web3 docs]: https://github.com/ethereum/wiki/wiki/JavaScript-API
+[account]: https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethaccounts
+[hide]: http://api.jquery.com/hide/
