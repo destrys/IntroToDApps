@@ -16,7 +16,7 @@ First, an ugly diagram:
 * [Chrome Browser]
 * [MetaMask Chrome Extension]
 * [Kovan Testnet] Tokens (see detailed instructions below)
-* [Infura] account
+* [Infura.io] account
 
 **Windows Users:** Try using [VS Code with Truffle]
 
@@ -45,6 +45,39 @@ You must get your **Kovan** address from MetaMask. Be sure to select
 at the top of the extension. You can click `Account 1` to easily copy the address.
 
 ### MetaMask SetUp
+
+#### Seed Words
+
+MetaMask and Ganache need to be using the same seed words to use the same accounts.
+You can choose either of these routes:
+
+##### Use MetaMask Seed Words (recommended)
+
+1. Set up MetaMask
+2. If you didn't copy the seed phrase (you should have!) go to the MetaMask Settings
+and select 'Reveal Seed Words'. Copy them.
+3. Open Ganache
+4. Navigate to "Accounts & Keys" in the Ganache settings
+5. Turn **OFF** 'autogenerate HD Mnemonic' and paste the words from step 2.
+6. Click 'Save & Restart'
+
+
+##### Use Ganache Seed Words
+
+1. Start up Ganache
+2. Copy the **MNEMONIC** (12 random words near the top of the ganache window)
+3. Navigate to "Accounts & Keys" in the Ganache settings
+4. Turn **OFF** 'autogenerate HD Mnemonic' and paste the 12 words from step 2.
+5. Click 'Save & Restart'
+6. If you haven't used MetaMask before, use 'Import with Seed Phrase' during the
+intial MetaMask configuration
+7. If you have used MetaMask before, Log Out, then select 'Import using
+account seed phrase' at the bottom of the log in window.
+8. Use the words from step 2 to re-initialize MetaMask
+
+
+
+#### Connection
 
 To use MetaMask with Ganache, you will need to setup a 'Custom RPC' network connection.
 Follow these directions carefully:
@@ -297,9 +330,61 @@ about users or passwords.
 
 # Deployment
 
+There are two parts of deploying our dApp: the smart contract and the web app.
+
+## Smart Contract Deployment
+
+So far, we've been deploying our smart contract to our local blockchain (Ganache)
+with Truffle. For our app to actually be distributed/decentralized, we need
+to deploy the contract to a external blockchain. And we don't want it to cost
+us real money to do this while were' developing. So we'll be using one of the
+ethereum testnets (Rinkeby, Kovan, or Ropsten).
+
+**Note:** There are many services available to assist you in deploying your
+smart contract. Do your research before using any third-party service.
+
+The safest route is to run your own full node, and what I recommend, but
+setting up a full node takes time for downloading the blockchain, and takes
+work to keep synced and running. So for development, and this class, we'll be using
+[Infura.io] for a hosted node.
+
+Here are the steps:
+
+1. Sign up for [Infura.io]
+2. Create a project
+3. 'View Project' and copy the `Project ID`
+4. Paste the `Project ID` into the `.env` file in the pet shop directory
+as `INFURA_API_KEY`.
+5. Paste your seed words fomr ganache/MetaMask into `.env`
+6. Edit `truffle-config.js` to include a `kovan` network.
+An example is provided in `solutions/truffle-config_kovan.js`
+7. `truffle migrate --network kovan`
+8. Go find your contract on a block explorer!
+
+[Infura-Truffle reference 1]
+[Infura-Truffle reference 2]
+
 
 **WIP**
 
+
+
+## Other Things to Consider
+
+1. Instead of including the deployed contract address as part of the dApp, you could
+add a field where the user inputs the contract address. This decouples the web app
+from the smart contract.
+
+
+# About the Instructor
+
+I'm Destry! I'm employee #0 at [Unchained Capital]. While early start-ups require
+everyone to work on everything, my focus has been on being our blockchain specialist.
+Address creation, authoring transactions, hardware wallet integrations,
+signing protocols, and [our ethereum multisig dApp] are examples of what I've
+been working on. Before Unchained, I was a data scientist/engineer/big data solution
+architect at InfoChimps and Cisco. And before that, I earned a Ph.D. in
+[astrophyics].
 
 
 [infura reference]: https://medium.com/coinmonks/steps-to-deploy-a-contract-using-metamask-and-truffle-7ae65e6d8dc8
@@ -312,7 +397,7 @@ about users or passwords.
 [chrome browser]: https://www.google.com/chrome/
 [metamask chrome extension]: https://metamask.io/
 [kovan testnet]: https://gitter.im/kovan-testnet/faucet
-[infura]: https://infura.io
+[infura.io]: https://infura.io
 
 [truffle pet shop]: https://truffleframework.com/tutorials/pet-shop
 
@@ -329,3 +414,9 @@ about users or passwords.
 [old web3 docs]: https://github.com/ethereum/wiki/wiki/JavaScript-API
 [account]: https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethaccounts
 [hide]: http://api.jquery.com/hide/
+[truffle with infura]: https://truffleframework.com/tutorials/using-infura-custom-provider
+[infura-truffle reference 1]: https://truffleframework.com/tutorials/using-infura-custom-provider
+[infura-truffle reference 2]: https://medium.com/coinmonks/deploy-your-smart-contract-directly-from-truffle-with-infura-ba1e1f1d40c2
+[unchained capital]: https://www.unchained-capital.com/
+[astrophyics]: http://adsabs.harvard.edu/cgi-bin/nph-abs_connect?db_key=AST&db_key=PRE&qform=AST&arxiv_sel=astro-ph&arxiv_sel=cond-mat&arxiv_sel=cs&arxiv_sel=gr-qc&arxiv_sel=hep-ex&arxiv_sel=hep-lat&arxiv_sel=hep-ph&arxiv_sel=hep-th&arxiv_sel=math&arxiv_sel=math-ph&arxiv_sel=nlin&arxiv_sel=nucl-ex&arxiv_sel=nucl-th&arxiv_sel=physics&arxiv_sel=quant-ph&arxiv_sel=q-bio&sim_query=YES&ned_query=YES&adsobj_query=YES&aut_logic=OR&obj_logic=OR&author=Saul%2C+Destry&object=&start_mon=&start_year=&end_mon=&end_year=&ttl_logic=OR&title=&txt_logic=OR&text=&nr_to_return=200&start_nr=1&jou_pick=ALL&ref_stems=&data_and=ALL&group_and=ALL&start_entry_day=&start_entry_mon=&start_entry_year=&end_entry_day=&end_entry_mon=&end_entry_year=&min_score=&sort=SCORE&data_type=SHORT&aut_syn=YES&ttl_syn=YES&txt_syn=YES&aut_wt=1.0&obj_wt=1.0&ttl_wt=0.3&txt_wt=3.0&aut_wgt=YES&obj_wgt=YES&ttl_wgt=YES&txt_wgt=YES&ttl_sco=YES&txt_sco=YES&version=1
+[our ethereum multisig dapp]: https://ethereum-multisig.unchained-capital.com/
