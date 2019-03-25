@@ -19,7 +19,8 @@ module.exports={
       ],
       "payable": false,
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "signature": "0x43ae80d3"
     },
     {
       "constant": true,
@@ -33,13 +34,15 @@ module.exports={
       ],
       "payable": false,
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "signature": "0xf851a440"
     },
     {
       "inputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "constructor"
+      "type": "constructor",
+      "signature": "constructor"
     },
     {
       "constant": false,
@@ -58,7 +61,8 @@ module.exports={
       ],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function"
+      "type": "function",
+      "signature": "0x8588b2c5"
     },
     {
       "constant": false,
@@ -77,7 +81,8 @@ module.exports={
       ],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function"
+      "type": "function",
+      "signature": "0x90b84029"
     },
     {
       "constant": true,
@@ -91,7 +96,8 @@ module.exports={
       ],
       "payable": false,
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "signature": "0x3de4eb17"
     }
   ],
   "bytecode": "0x608060405234801561001057600080fd5b5033601060006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550610512806100616000396000f3fe60806040526004361061006d576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680633de4eb171461007257806343ae80d3146100c55780638588b2c51461014057806390b840291461018f578063f851a440146101de575b600080fd5b34801561007e57600080fd5b50610087610235565b6040518082601060200280838360005b838110156100b2578082015181840152602081019050610097565b5050505090500191505060405180910390f35b3480156100d157600080fd5b506100fe600480360360208110156100e857600080fd5b81019080803590602001909291905050506102b6565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34801561014c57600080fd5b506101796004803603602081101561016357600080fd5b81019080803590602001909291905050506102eb565b6040518082815260200191505060405180910390f35b34801561019b57600080fd5b506101c8600480360360208110156101b257600080fd5b81019080803590602001909291905050506103cb565b6040518082815260200191505060405180910390f35b3480156101ea57600080fd5b506101f361049c565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b61023d6104c2565b60006010806020026040519081016040528092919082601080156102ac576020028201915b8160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019060010190808311610262575b5050505050905090565b6000816010811015156102c557fe5b016000915054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60008082101580156102fe5750600f8211155b151561030957600080fd5b600073ffffffffffffffffffffffffffffffffffffffff1660008360108110151561033057fe5b0160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1614151561037457600080fd5b3360008360108110151561038457fe5b0160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550819050919050565b60008082101580156103de5750600f8211155b15156103e957600080fd5b601060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614151561044557600080fd5b6000808360108110151561045557fe5b0160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550819050919050565b601060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6102006040519081016040528060109060208202803883398082019150509050509056fea165627a7a7230582099f48c97471af36867cff5af1ec97b21284e6de3e17b7b21a0c2fe92cd55f8670029",
@@ -2770,8 +2776,8 @@ module.exports={
     "42": {
       "events": {},
       "links": {},
-      "address": "0x685436B8e75eff9CFbC51FAa6B2eC86fBDb5d6ec",
-      "transactionHash": "0x305cf6c23d08e5a5f62b9086a9e67d99a99704841bf63ec9f37203a6a63eec19"
+      "address": "0xac08B9485087A0bB473D05B05503f44dB5083950",
+      "transactionHash": "0x55058dc4bcd5c6a6a757ad6737a0c3364ef1862d8a4724fba89faa2edd6c44f2"
     },
     "5777": {
       "events": {},
@@ -2781,7 +2787,7 @@ module.exports={
     }
   },
   "schemaVersion": "3.0.3",
-  "updatedAt": "2019-03-25T20:41:18.608Z",
+  "updatedAt": "2019-03-25T20:48:56.999Z",
   "devdoc": {
     "methods": {}
   },
