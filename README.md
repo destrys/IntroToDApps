@@ -135,9 +135,9 @@ When you click 'adopt', MetaMask should pop up an authorization window.
 Authorizing the transaction should change the button from 'Adopt' to 'Success'.
 
 The important files for this dApp are:
-(pet-shop-tutorial/contracts/Adoption.sol)[pet-shop-tutorial/contracts/Adoption.sol],
-(pet-shop-tutorial/src/index.html)[pet-shop-tutorial/src/index.html],
-and (pet-shop-tutorial/src/js/app.js)[pet-shop-tutorial/src/js/app.js].
+[pet-shop-tutorial/contracts/Adoption.sol](pet-shop-tutorial/contracts/Adoption.sol),
+[pet-shop-tutorial/src/index.html](pet-shop-tutorial/src/index.html),
+and [pet-shop-tutorial/src/js/app.js](pet-shop-tutorial/src/js/app.js).
 Open them in you text editor and poke around.
 
 
