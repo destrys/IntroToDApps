@@ -1,5 +1,3 @@
- IntroToDApps
-
 First, an ugly diagram:
 
 ![reference](resources/ethereumDiagram.png)
