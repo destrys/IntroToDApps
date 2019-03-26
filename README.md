@@ -1,4 +1,4 @@
-# IntroToDApps
+ IntroToDApps
 
 :construction: **Work in Progress** :construction:
 
@@ -153,13 +153,14 @@ We'll discuss the function and design of this 'smart' contract for a bit.
 Some important points to cover:
 
 1. What is stored in the contract?
-  a. State
-  b. Logic
-  c. Views (in this case)
+    a. State
+    b. Logic
+    c. Views (in this case)
 2. How is the contract initialized?
 3. How is the state changed, and who has access?
 4. What cannot be changed?
 5. What off-chain information is part of the app and how are those data joined?
+6. Who are antagonistic, and how does this contract resolve/prevent the dispute?
 
 Note: Docs regarding the [array getter function].
 
@@ -172,6 +173,13 @@ We'll discuss testing. Some important points to cover:
 
 1. Solidity vs. Javascript testing
 2. The importance of testing
+
+```
+truffle test
+```
+
+[test/TestAdoption.sol](test/TestAdoption.sol)
+[test/TestAdoption.js](test/TestAdoption.js)
 
 
 # Exercise - Smart Contract Improvements
@@ -195,7 +203,7 @@ Running `truffle test` will now test the an adopted pet can't be re-adopted.
 
 The solution is provided in `solutions/Adoption_stop_readopt.sol`.
 
-**Note:** The tests for this exercise include tests the the contract `reverts`.
+**Note:** The tests for this exercise check that the contract `reverts`.
 This is an important result to test for (and should have been included in the initial
 tests)
 
@@ -207,7 +215,7 @@ Now that our contract only allows a pet to be adopted once, it really can only
 handle 16 adoptions and then it's done. It would be nice if someone could reset
 a pet to unadopted, but we don't want anyone on the internet to be able to do that.
 
-So now we need a privaledged user.
+So now we need a privileged user.
 
 The easiest way to set an admin user is to initialize the admin user as the
 address that deployed the contract. Our contract currently doesn't run any function
@@ -253,6 +261,10 @@ There are additional checks and functions you could add around this feature:
 1. [Remix] - alternative/complementary IDE
 2. [The Ethernaut] - learn smart contract security issues via blockchain-based 'game'
 
+
+
+**NOTE:** Before moving on to the following section, be sure to `truffle migrate --reset` once
+the contract passes all the tests.
 
 
 # DApps, UIs, Etc.
@@ -307,11 +319,12 @@ function.
 Copy `solutions/index_unadopt.html` to `src/index.html` (or write your own button
 code).
 
-As part of `setAdmin`, also hide the `unadopt` buttons from non-admins.
-
 Write a `handleUnadopt` function to call `unadopt` on the contract
 when the Unadopt button is clicked. And don't forget to add the handler to
-`bindEvents`.
+`bindEvents`. (You'll also probably want to disable the `Unadopt` buttons in `markAdopted`)
+As part of `setAdmin`, also hide the `unadopt` buttons from non-admins.
+
+You can view the solution at `solutions/app_unadopt.js`.
 
 **Important Note:** While we are hiding the admin interface from non-admins, there
 is nothing to stop and address from *attempting* to call `unadopt` on our contract.
@@ -417,6 +430,16 @@ My personal favorite for fast development and easy sharing is
 1. Instead of including the deployed contract address as part of the dApp, you could
 add a field where the user inputs the contract address. This decouples the web app
 from the smart contract.
+
+
+
+# Take-away points
+
+1. Blockchains are for *antagonistic* environments
+2. Smart contracts store **state** and the **logic** to change that state
+3. dApps are *reference interfaces* paired with smart contracts
+4. Test, Test, Test!
+
 
 
 # About the Instructor
