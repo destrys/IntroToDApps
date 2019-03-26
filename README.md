@@ -25,6 +25,12 @@ First, an ugly diagram:
 * Basic JavaScript skills
 * [Truffle Pet Shop] Tutorial - highly recommended
 
+### Truffle
+
+It makes life a lot easier if you install truffle globally:
+
+`npm install -g truffle`
+
 
 ### Testnet Tokens
 
@@ -355,7 +361,7 @@ Here are the steps:
 3. 'View Project' and copy the `Project ID`
 4. Paste the `Project ID` into the `.env` file in the pet shop directory
 as `INFURA_API_KEY`.
-5. Paste your seed words fomr ganache/MetaMask into `.env`
+5. Paste your seed words from ganache/MetaMask into `.env`
 6. Edit `truffle-config.js` to include a `kovan` network.
 An example is provided in `solutions/truffle-config_kovan.js`
 7. `truffle migrate --network kovan`
@@ -364,8 +370,45 @@ An example is provided in `solutions/truffle-config_kovan.js`
 [Infura-Truffle reference 1]
 [Infura-Truffle reference 2]
 
+## Web App deployment
 
-**WIP**
+Our web app has (hopefully) been working great using our locally running
+[lite server]. But that's not a real solution. We could deploy host this app
+on any of our favorite hosting sites, or our own server. But if we
+are able to bundle this app up, we have some more interesting options.
+
+I've included a copy of `index.html` and `app.js` that we can use with
+[browserify] to avoid doing calls to the server for `.json` files.
+
+Copy `solutions/index_bundleable.html` to `src/index.html` and
+`solutions/app_bundleable.js` to `src/js/app.js`. We'll take a look at
+what's going on there.
+
+Assuming you've migrated your contract (with admin and unadopt features)
+to kovan already, this command will
+bundle up the javascript:
+
+```
+./node_modules/browserify/bin/cmd.js src/js/app.js > src/js/bundled.js
+```
+
+Now you should be able to point your browser at
+`file:///INSERT_PATH_TO_REPO_HERE/IntroToDApps/pet-shop-tutorial/src/index.html`
+and see a bunch of dog faces, but you **won't** be able to interact with the dApp.
+The reason is that MetaMask is retricted to `localhost` and `https` sites.
+`file:` is neither of those, so MetaMask won't work.
+
+We need to find somewhere to host these files. If you have a file server with
+https enabled, that should work. S3 or Azure also would work.
+My personal favorite for fast development and easy sharing is
+[github pages].
+
+1. Fork this repo to your own github account
+2. Turn on [github pages] for the repo, using the `master` branch.
+3. Run the browserify command above
+4. add `src/js/bundled.js` and all the other changed files to a git commit
+5. push to your github `master branch`
+6. Direct your browser to `https://INSERT_GITHUB_USERNAME_HERE.github.io/IntroToDApps/pet-shop-tutorial/src/index.html`
 
 
 
@@ -420,3 +463,6 @@ architect at InfoChimps and Cisco. And before that, I earned a Ph.D. in
 [unchained capital]: https://www.unchained-capital.com/
 [astrophyics]: http://adsabs.harvard.edu/cgi-bin/nph-abs_connect?db_key=AST&db_key=PRE&qform=AST&arxiv_sel=astro-ph&arxiv_sel=cond-mat&arxiv_sel=cs&arxiv_sel=gr-qc&arxiv_sel=hep-ex&arxiv_sel=hep-lat&arxiv_sel=hep-ph&arxiv_sel=hep-th&arxiv_sel=math&arxiv_sel=math-ph&arxiv_sel=nlin&arxiv_sel=nucl-ex&arxiv_sel=nucl-th&arxiv_sel=physics&arxiv_sel=quant-ph&arxiv_sel=q-bio&sim_query=YES&ned_query=YES&adsobj_query=YES&aut_logic=OR&obj_logic=OR&author=Saul%2C+Destry&object=&start_mon=&start_year=&end_mon=&end_year=&ttl_logic=OR&title=&txt_logic=OR&text=&nr_to_return=200&start_nr=1&jou_pick=ALL&ref_stems=&data_and=ALL&group_and=ALL&start_entry_day=&start_entry_mon=&start_entry_year=&end_entry_day=&end_entry_mon=&end_entry_year=&min_score=&sort=SCORE&data_type=SHORT&aut_syn=YES&ttl_syn=YES&txt_syn=YES&aut_wt=1.0&obj_wt=1.0&ttl_wt=0.3&txt_wt=3.0&aut_wgt=YES&obj_wgt=YES&ttl_wgt=YES&txt_wgt=YES&ttl_sco=YES&txt_sco=YES&version=1
 [our ethereum multisig dapp]: https://ethereum-multisig.unchained-capital.com/
+[lite server]: https://www.npmjs.com/package/lite-server
+[browserify]: http://browserify.org/
+[github pages]: https://pages.github.com/
