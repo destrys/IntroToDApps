@@ -288,9 +288,7 @@ Points to cover:
 **Note:** This app included `web3` and `truffle-contract` files. For your project,
 you may want to use the npm to include the [web3] and [truffle-contract]
 
-**Caution!** The `web3` included in this app is an older version. `web3` v1.0
-is still in beta and
-has many breaking changes, so for this class, refer to the [old web3 docs]. 
+**Caution!** The `web3` included in this app is an older version, so for this class, refer to the [old web3 docs]. 
 
 
 ## Exercise - Admin Viewing Button
